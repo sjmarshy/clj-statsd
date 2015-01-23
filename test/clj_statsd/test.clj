@@ -49,6 +49,13 @@
     (unique "unique" 765)
     (unique :unique 765)))
 
+(deftest should-send-histogram
+  (should-send-expected-stat "testhist:34|h" 2 2
+    (histogram "testhist" 34)
+    (histogram :testhist  34))
+  (should-send-expected-stat "testhist:23|h"  1 1
+    (histogram "testhist" 23)))
+
 (deftest should-send-timing-with-default-rate
   (should-send-expected-stat "glork:320|ms" 2 2
     (timing "glork" 320)  
